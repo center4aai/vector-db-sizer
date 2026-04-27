@@ -37,11 +37,11 @@ Use it for fast pre-implementation sizing work, such as:
 
 ## Quick start
 
+Run directly from PyPI with `uvx`:
+
 ```bash
-uv sync
-uv run vector-db-sizer validate examples/qdrant_text_hnsw.yaml
-uv run vector-db-sizer estimate examples/qdrant_text_hnsw.yaml --format markdown --out report.md
-uv run vector-db-sizer estimate examples/multi_scenario.yaml --format csv --out comparison.csv
+uvx vector-db-sizer --help
+uvx vector-db-sizer list-engines
 ```
 
 ## Input YAML
@@ -65,13 +65,20 @@ database:
   index_type: hnsw
 ```
 
-## Single-scenario example
+## Validate and estimate
+
+```bash
+uvx vector-db-sizer validate scenario.yaml
+uvx vector-db-sizer estimate scenario.yaml --format markdown --out report.md
+```
+
+## Single-scenario example (from the local repository)
 
 ```bash
 uv run vector-db-sizer estimate examples/qdrant_text_hnsw.yaml --format markdown
 ```
 
-## Multi-scenario example
+## Multi-scenario example (from the local repository)
 
 ```bash
 uv run vector-db-sizer estimate examples/multi_scenario.yaml --format csv

@@ -1,0 +1,17 @@
+scenarios:
+  - name: same
+    dataset:
+      source_type: precomputed_vectors
+      vector_count: 10
+    embedding:
+      kind: dense
+      dimensions: 8
+      dtype: float32
+  - name: same
+    dataset:
+      source_type: precomputed_vectors
+      vector_count: 12
+    embedding:
+      kind: dense
+      dimensions: 8
+      dtype: float32

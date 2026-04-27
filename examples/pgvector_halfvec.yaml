@@ -1,0 +1,32 @@
+name: pgvector_halfvec
+
+dataset:
+  source_type: precomputed_vectors
+  vector_count: 1000000
+
+embedding:
+  kind: dense
+  dimensions: 768
+  dtype: float16
+
+record:
+  id_bytes_avg: 16
+  metadata_bytes_avg: 256
+  source_text_bytes_avg: 0
+  provenance_bytes_avg: 64
+
+database:
+  engine: pgvector
+  index_type: hnsw
+  replicas: 1
+  shards: 1
+
+index:
+  m: 16
+  hnsw_layer_factor: 1.2
+  link_bytes: 8
+
+storage:
+  wal_factor: 0.10
+  snapshot_factor: 0.00
+  safety_factor: 1.25

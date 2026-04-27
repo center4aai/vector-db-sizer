@@ -1,0 +1,120 @@
+scenarios:
+  - name: qdrant_text_hnsw
+    dataset:
+      source_type: text
+      total_tokens: 50000000
+      chunk_tokens: 512
+      chunk_overlap: 64
+      vectors_per_chunk: 1
+    embedding:
+      kind: dense
+      dimensions: 1536
+      dtype: float32
+    record:
+      id_bytes_avg: 16
+      metadata_bytes_avg: 512
+      source_text_bytes_avg: 0
+      provenance_bytes_avg: 128
+    database:
+      engine: qdrant
+      index_type: hnsw
+      replicas: 1
+      shards: 1
+    index:
+      m: 16
+      hnsw_layer_factor: 1.2
+      link_bytes: 8
+      quantization: none
+    storage:
+      payload_on_disk: true
+      vectors_on_disk: false
+      hnsw_on_disk: false
+      wal_factor: 0.10
+      snapshot_factor: 0.00
+      safety_factor: 1.25
+
+  - name: pgvector_halfvec
+    dataset:
+      source_type: precomputed_vectors
+      vector_count: 1000000
+    embedding:
+      kind: dense
+      dimensions: 768
+      dtype: float16
+    record:
+      id_bytes_avg: 16
+      metadata_bytes_avg: 256
+      source_text_bytes_avg: 0
+      provenance_bytes_avg: 64
+    database:
+      engine: pgvector
+      index_type: hnsw
+      replicas: 1
+      shards: 1
+    index:
+      m: 16
+      hnsw_layer_factor: 1.2
+      link_bytes: 8
+    storage:
+      wal_factor: 0.10
+      snapshot_factor: 0.00
+      safety_factor: 1.25
+
+  - name: elasticsearch_quantized
+    dataset:
+      source_type: precomputed_vectors
+      vector_count: 1000000
+    embedding:
+      kind: dense
+      dimensions: 1536
+      dtype: float32
+    record:
+      id_bytes_avg: 16
+      metadata_bytes_avg: 1000
+      source_text_bytes_avg: 0
+      provenance_bytes_avg: 128
+    database:
+      engine: elasticsearch
+      index_type: hnsw
+      replicas: 1
+      shards: 1
+    index:
+      m: 16
+      hnsw_layer_factor: 1.2
+      link_bytes: 8
+      quantization: scalar_int8
+    storage:
+      store_vectors_in_source: false
+      store_original_vectors: true
+      wal_factor: 0.10
+      snapshot_factor: 0.00
+      safety_factor: 1.25
+
+  - name: opensearch_hnsw
+    dataset:
+      source_type: precomputed_vectors
+      vector_count: 1000000
+    embedding:
+      kind: dense
+      dimensions: 768
+      dtype: float32
+    record:
+      id_bytes_avg: 16
+      metadata_bytes_avg: 512
+      source_text_bytes_avg: 0
+      provenance_bytes_avg: 64
+    database:
+      engine: opensearch
+      index_type: hnsw
+      replicas: 1
+      shards: 1
+    index:
+      m: 16
+      hnsw_layer_factor: 1.2
+      link_bytes: 8
+    storage:
+      mode: in_memory
+      compression_level: none
+      wal_factor: 0.10
+      snapshot_factor: 0.00
+      safety_factor: 1.25

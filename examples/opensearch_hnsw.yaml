@@ -1,0 +1,34 @@
+name: opensearch_hnsw
+
+dataset:
+  source_type: precomputed_vectors
+  vector_count: 1000000
+
+embedding:
+  kind: dense
+  dimensions: 768
+  dtype: float32
+
+record:
+  id_bytes_avg: 16
+  metadata_bytes_avg: 512
+  source_text_bytes_avg: 0
+  provenance_bytes_avg: 64
+
+database:
+  engine: opensearch
+  index_type: hnsw
+  replicas: 1
+  shards: 1
+
+index:
+  m: 16
+  hnsw_layer_factor: 1.2
+  link_bytes: 8
+
+storage:
+  mode: in_memory
+  compression_level: none
+  wal_factor: 0.10
+  snapshot_factor: 0.00
+  safety_factor: 1.25
